@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>CSS Position</title>
+        <style>
+            body {
+                background-color: #414141;
+            }
+
+            .container {
+                background-color: #1A1A1D;
+                height: 50px;
+                margin: 10px 10px;
+
+            }
+
+            .box {
+                width: 90px;
+                height: 50px;
+                position: absolute;
+                font-family: fantasy;
+                font-weight: bold;
+
+            }
+
+            #home {
+                top: 10px;
+                left: 10px;
+                /* background-color: #C3073F; */
+                background-color: #E9B000;
+                color: white;
+                border-radius: 10px 0px 0px 10px;
+            }
+
+            #news {
+                top: 10px;
+                left: 100px;
+                color: white;
+                background-color: #1A1A1D;
+            }
+
+            #trips {
+
+                position: absolute;
+                top: 10px;
+                left: 180px;
+                color: white;
+                background-color: #1A1A1D;
+
+            }
+
+            #search {
+                width: 250px;
+                top: 10px;
+                right: 10px;
+                background-color: #1A1A1D;
+                border-radius: 0px 10px 10px 0px;
+
+
+            }
+
+            button {
+                width: 50px;
+                border-radius: 5px;
+            }
+
+            .textbox {
+                margin-top: 10px;
+                border-radius: 5px;
+            }
+
+            .middle {
+                text-align: center;
+                vertical-align: center;
+
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <div id="home" class="box middle">
+                <p>Home</p>
+            </div>
+            <div id="news" class="box middle">
+                <p>News</p>
+            </div>
+            <div id="trips" class="box middle">
+                <p>Trips</p>
+            </div>
+            <div id="search" class="box"><input type="text" placeholder="search ..." class="textbox">
+                <button>&reg;</button></div>
+        </div>
+
+    </body>
+
+</html>
