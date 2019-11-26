@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+    </head>
+
+    <body>
+        <h2>Registration Form</h2>
+        Username : <br>
+        <input type="text" id="username"> <br>
+        Password : <br>
+        <input type="password" id="password"> <br><br>
+        <!-- <input type="submit" value="Submit" id="submit"> -->
+        <input type="submit" value="Submit" id="submit">
+        <h4 id="message"> </h4>
+
+        <script>
+            var _username = document.getElementById('username');
+            var _password = document.getElementById('password');
+            var _button = document.getElementById('submit');
+            var _message = document.getElementById('message');
+            var _error;
+
+            function validation() {
+                try {
+
+                    if (_username.value == "" && _password.value == "") {
+                        _error = true;
+                        throw "Username & Password cannot be empty!";
+                    }
+                    if (_username.value == "" || !(isNaN(_username.value))) {
+                        _error = true;
+                        throw "Username cannot be empty or a number!";
+                    }
+                    if (_password.value == "" || _password.value.length < 6) {
+                        _error = true;
+                        throw "Password cannot be empty or less than 6 characters long!";
+                    } else {
+                        _error = false;
+                        throw "Success!";
+                    }
+
+                } catch (error) {
+                    if (_error == true) {
+                        _message.innerHTML = error;
+                        _message.style.color = 'red';
+                    } else {
+                        _message.innerHTML = error;
+                        _message.style.color = 'yellowgreen';
+                    }
+                }
+            }
+
+            _button.onclick = function () {
+                validation();
+                console.log(typeof (_username.value));
+            }
+        </script>
+    </body>
+
+</html>
