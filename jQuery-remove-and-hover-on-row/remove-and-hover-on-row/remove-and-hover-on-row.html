@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>jQueryDOM</title>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+        <!-- Bootstrap core CSS -->
+        <link href="../css/bootstrap.min.css" rel="stylesheet">
+        <!-- Material Design Bootstrap -->
+        <link href="../css/mdb.min.css" rel="stylesheet">
+        <style>
+            body {
+                background-image: url('https://img.freepik.com/free-vector/white-background-with-blue-tech-hexagon_1017-19366.jpg?size=626&ext=jpg');
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+
+            header {
+
+                font-family: Arial;
+                background: #333;
+                color: white;
+                padding: 5px;
+                padding-left: 80px;
+                /* text-align: left; */
+                border-bottom: 4px #000 solid;
+                margin-bottom: 10px;
+                font-style: italic;
+
+
+            }
+
+            #container {
+                width: 90%;
+                margin: auto;
+                padding: 10px;
+            }
+
+            footer {
+                text-align: right;
+                margin-top: 10px;
+            }
+
+            .rowStyle {
+                background: gray;
+                color: white;
+            }
+
+            tr:hover {
+                cursor: pointer;
+
+            }
+        </style>
+    </head>
+
+
+
+
+    <body>
+
+        <header>
+            <p>1. Click on a specific row and confirm to remove </p>
+            <p>2. Hover on rows to change background color</p>
+        </header>
+
+
+        <div class="container">
+            <div class="row">
+                <table class="table">
+                    <thead class="black white-text">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">NAME</th>
+                            <th scope="col">CLASS</th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="usertable">
+
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+        <footer>
+            <h6>CCN</h6>
+        </footer>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+        <script>
+            var student = [{
+                    id: 1,
+                    name: 'A',
+                    class: 'E401'
+                },
+                {
+                    id: 2,
+                    name: 'B',
+                    class: 'E402'
+                },
+                {
+                    id: 3,
+                    name: 'C',
+                    class: 'E403'
+                },
+                {
+                    id: 4,
+                    name: 'D',
+                    class: 'E404'
+                },
+                {
+                    id: 5,
+                    name: 'E',
+                    class: 'E405'
+                },
+                {
+                    id: 6,
+                    name: 'F',
+                    class: 'E406'
+                },
+                {
+                    id: 7,
+                    name: 'G',
+                    class: 'E407'
+                }
+            ]
+
+            $(function () {
+                fetchData()
+                changeRowStyle()
+            })
+
+            // function removeRecord(record) {
+            //     let _confirm = confirm("Are you sure?")
+            //     if (_confirm == true) {
+
+            //         $(record).remove();
+            //     } else {
+
+            //     }
+            // }
+
+            function removeRecord(record) {
+                const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                        confirmButton: 'btn btn-success',
+                        cancelButton: 'btn btn-danger'
+                    },
+                    buttonsStyling: false
+                })
+
+                swalWithBootstrapButtons.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'No, cancel!',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.value) {
+                        $(record).remove();
+                            swalWithBootstrapButtons.fire(
+                                'Removed!',
+                                'The selected row has been removed.',
+                            )
+                    } else if (
+                        /* Read more about handling dismissals below */
+                        result.dismiss === Swal.DismissReason.cancel
+                    ) {
+                            swalWithBootstrapButtons.fire(
+
+                                'Cancelled',
+                                'The selected row is safe :)',
+    
+                            )
+                    }
+                })
+            }
+
+
+
+            function changeRowStyle() {
+                $('tbody tr').hover(function () {
+                    $(this).toggleClass('rowStyle')
+                })
+            }
+
+
+            function fetchData() {
+                let data = ''
+                for (s in student) {
+                    data = `
+                         <tr onclick=removeRecord(this)>
+                            <th scope="row">${student[s].id}</th>
+                            <td>${student[s].name}</td>
+                            <td>${student[s].class}</td>
+                        </tr>
+                        
+                    `
+                    $('tbody').append(data)
+                }
+            }
+
+        </script>
+
+        <!-- SCRIPTS -->
+        <!-- JQuery -->
+        <script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+        <!-- Bootstrap tooltips -->
+        <script type="text/javascript" src="../js/popper.min.js"></script>
+        <!-- Bootstrap core JavaScript -->
+        <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+        <!-- MDB core JavaScript -->
+        <script type="text/javascript" src="../js/mdb.min.js"></script>
+
+    </body>
+
+</html>
